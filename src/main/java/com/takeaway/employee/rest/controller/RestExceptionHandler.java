@@ -1,6 +1,7 @@
 package com.takeaway.employee.rest.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<?> handle(DataIntegrityViolationException e) {
+        log.error("Error: {}", e);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> handle(ConstraintViolationException e) {
         log.error("Error: {}", e);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
