@@ -54,12 +54,11 @@ public class EmployeeServiceTest {
         EmployeeRequest request=new EmployeeRequest("abc@xyz.com", "Name1", LocalDate.now(), UUID.randomUUID());
 
         // when
-        Employee account_saved = service.create(request);
+       service.create(request);
 
         // then
         then(accountRepository).should().save(any());
 
-        assertNotNull(account_saved.getId());
     }
 
 
