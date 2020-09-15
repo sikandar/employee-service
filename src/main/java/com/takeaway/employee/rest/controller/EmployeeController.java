@@ -1,5 +1,6 @@
 package com.takeaway.employee.rest.controller;
 
+import com.takeaway.employee.rest.request.EmployeeRequest;
 import com.takeaway.employee.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -7,8 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -16,6 +19,7 @@ import java.util.UUID;
 @RequestMapping(value = "/employees")
 @RequiredArgsConstructor
 @Tag(name = "Employee")
+@Validated
 public class EmployeeController {
 
     private final EmployeeService service;
@@ -26,19 +30,18 @@ public class EmployeeController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping(value = "/")
+    @PostMapping
     @Operation(summary = "Create a new Employee")
-    public ResponseEntity<?> employee(@RequestParam String email,
-                                      @RequestParam String fullName, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday, @RequestParam UUID departmentId) {
-        return ResponseEntity.ok(service.create(email, fullName, birthday, departmentId));
+    public ResponseEntity<?> employee(@RequestBody @Valid EmployeeRequest request) {
+        return ResponseEntity.ok(service.create(request));
     }
 
     @PutMapping(value = "/{id}")
     @Operation(summary = "Update an Employee")
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void employee(@PathVariable UUID id, @RequestParam String email, @RequestParam String fullName, @RequestParam LocalDate birthday, @RequestParam UUID departmentId) {
-        service.update(id, email, fullName, birthday, departmentId);
+    public void employee(@PathVariable UUID id, @RequestBody @Valid EmployeeRequest request) {
+        service.update(id, request);
     }
 
     @DeleteMapping(value = "/{id}")

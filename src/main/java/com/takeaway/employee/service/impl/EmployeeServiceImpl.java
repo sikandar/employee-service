@@ -3,6 +3,7 @@ package com.takeaway.employee.service.impl;
 import com.takeaway.employee.model.Department;
 import com.takeaway.employee.model.Employee;
 import com.takeaway.employee.repository.EmployeeRepository;
+import com.takeaway.employee.rest.request.EmployeeRequest;
 import com.takeaway.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Employee create(String email, String fullName, LocalDate birthday, UUID departmentId) {
-        return repository.save(new Employee(email, fullName, birthday, new Department(departmentId)));
+    public Employee create(EmployeeRequest request) {
+        return repository.save(new Employee(request.getEmail(), request.getFullName(), request.getBirthday(), new Department(request.getDepartmentId())));
     }
 
     @Override
-    public Employee update(UUID id, String email, String fullName, LocalDate birthday, UUID departmentId) {
-        return repository.save(new Employee(id, email, fullName, birthday, new Department(departmentId)));
+    public Employee update(UUID id, EmployeeRequest request) {
+        return repository.save(new Employee(id, request.getEmail(), request.getFullName(), request.getBirthday(), new Department(request.getDepartmentId())));
     }
 
     @Override

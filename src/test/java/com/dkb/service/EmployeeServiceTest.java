@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.takeaway.employee.model.Employee;
 import com.takeaway.employee.repository.EmployeeRepository;
+import com.takeaway.employee.rest.request.EmployeeRequest;
 import com.takeaway.employee.service.impl.EmployeeServiceImpl;
 import lombok.SneakyThrows;
 import org.junit.Before;
@@ -45,11 +46,13 @@ public class EmployeeServiceTest {
     public void saveAccountT() {
 
         // given
-        Employee account = mapper.readValue(Resources.getResource("account.json"), Employee.class);
-        given(accountRepository.save(any())).willReturn(account);
+        Employee employee = mapper.readValue(Resources.getResource("employee.json"), Employee.class);
+        given(accountRepository.save(any())).willReturn(employee);
+
+        EmployeeRequest request=new EmployeeRequest("abc@xyz.com", "Name1", LocalDate.now(), UUID.randomUUID());
 
         // when
-        Employee account_saved = service.create("abc@hop.com", "Sikandar", LocalDate.now(), UUID.randomUUID());
+        Employee account_saved = service.create(request);
 
         // then
         then(accountRepository).should().save(any());
