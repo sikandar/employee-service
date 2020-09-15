@@ -9,8 +9,8 @@ import com.takeaway.employee.rest.request.EmployeeRequest;
 public interface EmployeeService {
 
 
-	Employee create(EmployeeRequest request);
-	Employee update(UUID id, EmployeeRequest request);
+	void create(EmployeeRequest request);
+	void update(UUID id, EmployeeRequest request);
 	Employee findById(UUID id);
 	void delete(UUID id);
 

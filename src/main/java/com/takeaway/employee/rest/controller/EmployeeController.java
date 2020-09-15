@@ -32,8 +32,9 @@ public class EmployeeController {
 
     @PostMapping
     @Operation(summary = "Create a new Employee")
-    public ResponseEntity<?> employee(@RequestBody @Valid EmployeeRequest request) {
-        return ResponseEntity.ok(service.create(request));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void employee(@RequestBody @Valid EmployeeRequest request) {
+        service.create(request);
     }
 
     @PutMapping(value = "/{id}")

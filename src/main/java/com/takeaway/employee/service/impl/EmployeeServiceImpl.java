@@ -19,13 +19,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Employee create(EmployeeRequest request) {
-        return repository.save(new Employee(request.getEmail(), request.getFullName(), request.getBirthday(), new Department(request.getDepartmentId())));
+    public void create(EmployeeRequest request) {
+         repository.save(new Employee(request.getEmail(), request.getFullName(), request.getBirthday(), new Department(request.getDepartmentId())));
     }
 
     @Override
-    public Employee update(UUID id, EmployeeRequest request) {
-        return repository.save(new Employee(id, request.getEmail(), request.getFullName(), request.getBirthday(), new Department(request.getDepartmentId())));
+    public void update(UUID id, EmployeeRequest request) {
+         repository.save(new Employee(id, request.getEmail(), request.getFullName(), request.getBirthday(), new Department(request.getDepartmentId())));
     }
 
     @Override
