@@ -24,9 +24,16 @@ public class EmployeeController {
 
     private final EmployeeService service;
 
+    @GetMapping
+    @Operation(summary = "Get All employees")
+    public ResponseEntity<?> employees() {
+        return ResponseEntity.ok(service.findAll());
+    }
+
+
     @GetMapping(value = "/{id}")
     @Operation(summary = "Get employee information")
-    public ResponseEntity<?> accounts(@PathVariable UUID id) {
+    public ResponseEntity<?> employees(@PathVariable UUID id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
