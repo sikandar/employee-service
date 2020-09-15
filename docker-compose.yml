@@ -17,7 +17,7 @@ services:
 
   app-service:
     depends_on: 
-      - database
+    - database
     networks:
     - app-tier
     image: app

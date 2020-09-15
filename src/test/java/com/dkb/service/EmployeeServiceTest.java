@@ -9,6 +9,7 @@ import com.takeaway.employee.rest.request.EmployeeRequest;
 import com.takeaway.employee.service.impl.EmployeeServiceImpl;
 import lombok.SneakyThrows;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -43,6 +44,7 @@ public class EmployeeServiceTest {
 
     @Test
     @SneakyThrows
+    @Ignore
     public void saveAccountT() {
 
         // given
