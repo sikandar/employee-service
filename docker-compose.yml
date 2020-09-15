@@ -1,0 +1,29 @@
+version: "3"
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  database:
+    networks:
+    - app-tier
+    image: postgres:10.6
+    ports:
+    - "5432:5432"
+    environment:
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=password
+
+
+  app-service:
+    depends_on: 
+      - database
+    networks:
+    - app-tier
+    image: app
+    ports:
+    - "8860:8860"
+    build:
+      context: ./
+      dockerfile: Dockerfile
+

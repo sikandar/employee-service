@@ -1,0 +1,16 @@
+[
+  {
+    "id": "be89c4e2-319e-4c6c-85bf-cdad3f4b67d2",
+    "firstName": "Mark",
+    "lastName": "Teller",
+    "createdAt": "2020-02-06T01:00:32Z",
+    "lastUpdatedAt": "2020-02-06T01:00:32Z"
+  },
+  {
+    "id": "0e678940-93d5-4699-a987-5d8c215cdf5c",
+    "firstName": "Sikandar",
+    "lastName": "Ali",
+    "createdAt": "2020-02-06T01:00:32Z",
+    "lastUpdatedAt": "2020-02-06T01:00:32Z"
+  }
+]

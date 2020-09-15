@@ -1,0 +1,61 @@
+#APP INFO
+info:
+   app:
+      description: Employee-Service (MicroService)
+      name: employee-service
+      version: '@pom.version@'
+      
+server:
+#Tomcat Settings
+   port: 8860
+tomcat:
+   secure:
+      enable: false
+
+springdoc:
+  swagger-ui:
+    path: '/swagger.html'
+
+db:
+  host: localhost
+  port: 5432
+  name: postgres
+  username: postgres
+  password: password
+   
+spring:
+  datasource:
+    continue-on-error: false
+    platform: postgresql
+    driver-class-name: org.postgresql.Driver
+    username: ${db.username}
+    password: ${db.password}
+    name: ${db.name}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      use-new-id-generator-mappings: true
+    show-sql: false
+    generate-ddl: true 
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database: postgresql
+
+---
+spring:
+  profiles: 
+    active: default
+  datasource:
+    url: "jdbc:postgresql://employee-service_database_1:${db.port}/${db.name}"
+
+---         
+spring:
+  profiles: 
+    active: dev
+  datasource:
+    url: "jdbc:postgresql://localhost:${db.port}/${db.name}"
+
+#192.168.137.116
+#dkb-service_database_1
+
+             
